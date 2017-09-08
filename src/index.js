@@ -1,5 +1,5 @@
-const debug = require(`debug`)(`node-skeleton`);
+const debug = require(`debug`)(`ilp-plugin-starling`)
 
 module.exports = {
-  testFunction: () => true
-};
+  testFunction: () => true,
+}

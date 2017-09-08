@@ -1,7 +1,7 @@
 {
-  "name": "node-skeleton",
+  "name": "ilp-plugin-starling",
   "version": "0.0.0",
-  "description": "Description ",
+  "description": "An Interledger plugin for Starling Bank",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattdean1/node-skeleton.git"
+    "url": "git+https://github.com/mattdean1/ilp-plugin-starling.git"
   },
   "author": "Matt Dean",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mattdean1/node-skeleton/issues"
+    "url": "https://github.com/mattdean1/ilp-plugin-starling/issues"
   },
-  "homepage": "https://github.com/mattdean1/node-skeleton#readme",
+  "homepage": "https://github.com/mattdean1/ilp-plugin-starling#readme",
   "devDependencies": {
     "eslint": "^4.5.0",
     "mocha": "^3.5.0",

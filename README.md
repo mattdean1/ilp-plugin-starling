@@ -1,53 +1,25 @@
-[![Build Status](https://travis-ci.org/mattdean1/node-skeleton.svg?branch=master)](https://travis-ci.org/mattdean1/node-skeleton)
+# Interledger - Starling Bank plugin
 
-# node-skeleton
+## What?
 
-> Get started with Node projects quickly
+The Interledger Protocol (ILP) is a [protocol suite](https://github.com/interledger/rfcs/blob/master/0001-interledger-architecture/0001-interledger-architecture.md#interledger-protocol-suite) for connecting blockchains and other ledgers.
 
-#### What does this package do?
-
-Use this to get started with a new project quickly, with the following already set up:
-
-- Directory structure
-- ESLint
-- Mocha
-- Travis
-- License
-- README
-
-# Install
-
-```
-git clone https://github.com/mattdean1/node-skeleton <new project name>
-cd <new project name>
-rm -rf ./.git
-git init
-git remote add origin <new project url>
-git commit -am "Initial commit"
-git push -u origin master
-npm install
-```
-
-# Usage
-
-Once you've followed the steps above you can find and replace `node-skeleton` with your new project name and get started!
-
-It's best to follow a consistent format with the README, so I left the headings in this file.
+This plugin implements the ILP [ledger abstraction interface](https://github.com/interledger/rfcs/blob/master/0004-ledger-plugin-interface/0004-ledger-plugin-interface.md), allowing Interledger clients and connectors to communicate with, and route payments across, the [Starling Bank](https://www.starlingbank.com/) ledger.
 
 
 
-# API
+## Ledger Requirements
 
+Starling meets the [requirements for minimal Interledger support](https://github.com/interledger/rfcs/blob/master/0017-ledger-requirements/0017-ledger-requirements.md#minimal-support), i.e. it has "the ability to transfer funds from one account to another"
 
-###  Logging
-
-See the [debug module](https://www.npmjs.com/package/debug). Use the package name (`node-skeleton`) as the string in the environment variable.
-
-
-# Release Map / Changelog
+The Starling ledger does not support conditional transfers, but we can use it with Interledger in a [number of ways](https://github.com/interledger/rfcs/blob/master/0017-ledger-requirements/0017-ledger-requirements.md#appendix-a-holds-without-native-ledger-support), an implementation being [Trustlines](https://github.com/interledger/rfcs/blob/master/0022-hashed-timelock-agreements/0022-hashed-timelock-agreements.md#trustlines).
 
 
 
-# Contributions
+## Plugin architecture
 
-All contributions welcome! Please feel free to open an issue/PR :smile:
+This plugin uses the ILP [payment-channel-framework plugin](https://github.com/interledgerjs/ilp-plugin-payment-channel-framework) to save re-implementing common functionality such as implementing the ledger plugin interface, logging transfers, and keeping balances.
+
+Following the [example for unconditional payments](https://github.com/interledgerjs/ilp-plugin-payment-channel-framework#example-code-with-unconditional-payment-based-settlement), we do this by calling the `makePaymentChannelPlugin` function, passing in an object which implements the [Payment Channel Module API](https://github.com/interledgerjs/ilp-plugin-payment-channel-framework#payment-channel-module-api).
+
+This returns an instance of [LedgerPlugin](https://github.com/interledger/rfcs/blob/master/0004-ledger-plugin-interface/0004-ledger-plugin-interface.md#class-ledgerplugin)!
